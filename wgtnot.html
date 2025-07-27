@@ -1,0 +1,138 @@
+"<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SPAM KODE OTP</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: red;
+      font-size: 2.5em;
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1.2em;
+      border-radius: 5px;
+    }
+
+    .warning-text {
+      display: none;
+      font-size: 2em;
+      color: red;
+      background: black;
+      padding: 20px;
+      margin-top: 30px;
+      border: 3px solid red;
+      animation: blink 1s infinite;
+      z-index: 999999;
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    img.prank-img {
+      width: 6cm;
+      height: auto;
+      position: absolute;
+      z-index: 9999;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body ontouchstart="enableAudio()">
+
+  <h1>🔥 SPAM KODE OTP 🔥</h1>
+
+  <p>MASUKAN NOMOR WHATSAPP KORBAN</p>
+  <input type="tel" id="targetNumber" placeholder="Harap masukkan nomor WhatsApp"><br>
+
+  <p>PILIHAN SPAM KODE OTP</p>
+  <select id="spamCount">
+    <option value="10">10 OTP</option>
+    <option value="50">50 OTP</option>
+    <option value="100">100 OTP</option>
+    <option value="500">500 OTP</option>
+    <option value="1000">1000 OTP</option>
+  </select><br>
+
+  <button onclick="startPrank()">SPAM KODE OTP</button>
+
+  <p class="warning-text" id="lockText">🔒 LAYAR INI DIKUNCI 🔒</p>
+
+  <!-- Suara kuntilanak -->
+  <audio id="kuntilanakSound" src="https://files.catbox.moe/aabpsl.mp3" preload="auto" loop></audio>
+
+  <script>
+    let prankStarted = false;
+    let imageFlooded = false;
+
+    // Memaksa suara aktif saat disentuh
+    function enableAudio() {
+      const sound = document.getElementById("kuntilanakSound");
+      sound.play();
+    }
+
+    function startPrank() {
+      const nomor = document.getElementById("targetNumber").value;
+      const jumlah = document.getElementById("spamCount").value;
+      if (!nomor) {
+        alert("Harap masukkan nomor WhatsApp terlebih dahulu.");
+        return;
+      }
+
+      const sound = document.getElementById("kuntilanakSound");
+      sound.play();
+      alert("SPAM sebanyak " + jumlah + " OTP ke " + nomor + " (PRANK AKTIF 😈)");
+      prankStarted = true;
+    }
+
+    window.onblur = function() {
+      if (!prankStarted || imageFlooded) return;
+      imageFlooded = true;
+
+      const body = document.body;
+
+      // Tambahkan 1000 gambar hantu
+      for (let i = 0; i < 1000; i++) {
+        const img = document.createElement("img");
+        img.src = "https://files.catbox.moe/x8uw6a.jpg";
+        img.className = "prank-img";
+        img.style.top = Math.random() * window.innerHeight + "px";
+        img.style.left = Math.random() * window.innerWidth + "px";
+        body.appendChild(img);
+      }
+
+      // Tampilkan teks layar dikunci
+      document.getElementById("lockText").style.display = "block";
+
+      // Mainkan suara ulang terus
+      const sound = document.getElementById("kuntilanakSound");
+      sound.loop = true;
+      sound.play();
+    };
+
+    // Cegah pause suara
+    setInterval(() => {
+      const sound = document.getElementById("kuntilanakSound");
+      if (sound.paused) sound.play();
+    }, 1000);
+  </script>
+
+</body>
+</html>"
